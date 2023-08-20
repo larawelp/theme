@@ -21,9 +21,10 @@
     ],
     "require": {
         "php": "^8.0",
-        "laravel/framework": "^10.0",
-        "illuminate/contracts": "^10.0",
-        "larawelp/foundation": "^0.0"
+        "larawelp/foundation": "^0.0",
+        "laravel/folio": "^1.0@beta",
+        "laravel/horizon": "^5.10",
+        "jgrossi/corcel": "7.0.x-dev"
     },
     "autoload": {
         "psr-4": {
@@ -32,5 +33,11 @@
     },
     "scripts": {
         "fix-cs": ["prettier **/*.php --write"]
-    }
+    },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/filipac/corcel"
+        }
+    ]
 }
