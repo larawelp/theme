@@ -38,8 +38,10 @@
             "LaraWelP\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover --ansi"
         ],
+        "post-root-package-install": [
+            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+        ],
         "post-create-project-cmd": [
-            "@php copy('.env.example', '.env');",
             "@php artisan key:generate --ansi",
             "@php artisan theme:use --ask"
         ]
