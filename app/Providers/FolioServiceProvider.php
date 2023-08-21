@@ -21,6 +21,9 @@ class FolioServiceProvider extends ServiceProvider
     public function boot(): void
     {
         \Event::listen('register.folio', function () {
+            if(!file_exists(resource_path('views/pages'))) {
+                return;
+            }
             Folio::path(resource_path('views/pages'))->middleware([
                 '*' => [
                     //
