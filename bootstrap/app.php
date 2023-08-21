@@ -11,6 +11,10 @@
 |
 */
 
+if(!file_exists(__DIR__ . '/../../../../wp-load.php')) {
+    throw new Exception('LaraWelP needs WordPress to run properly. Theme has to be placed in wp-content/themes/{name} folder.');
+}
+
 $app = new Illuminate\Foundation\Application(
     $_ENV['APP_BASE_PATH'] ?? dirname(__DIR__)
 );
