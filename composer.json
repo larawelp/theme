@@ -22,8 +22,6 @@
     "require": {
         "php": "^8.0",
         "larawelp/foundation": "^0.0",
-        "laravel/folio": "^1.0@beta",
-        "laravel/horizon": "^5.10",
         "jgrossi/corcel": "7.0.x-dev"
     },
     "autoload": {

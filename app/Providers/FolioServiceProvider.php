@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Laravel\Folio\Folio;
+use LaraWelP\Foundation\Events\WhenFolioRegisters;
 
 class FolioServiceProvider extends ServiceProvider
 {
@@ -20,15 +21,18 @@ class FolioServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        \Event::listen('register.folio', function () {
-            if(!file_exists(resource_path('views/pages'))) {
-                return;
-            }
-            Folio::path(resource_path('views/pages'))->middleware([
-                '*' => [
-                    //
-                ],
-            ]);
-        });
+        WhenFolioRegisters::provide([$this, 'registerFolioRoutes']);
+    }
+
+    public function registerFolioRoutes()
+    {
+        if (!file_exists(resource_path('views/pages'))) {
+            return;
+        }
+        Folio::path(resource_path('views/pages'))->middleware([
+            '*' => [
+                //
+            ],
+        ]);
     }
 }
