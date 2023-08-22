@@ -27,6 +27,10 @@ Yes, it is a framework but not for general WordPress theme development. LaraWelP
 
 I'd say almost no differences there, except some additional tweaking, which gets Laravel to work well inside a WordPress theme. So basically you could do anything that you could do with Laravel, it's just the regular Laravel inside a WordPress theme. If you are curious about what exactly have been modified, taking a diff to the original Laravel would make sense for you.
 
+## Known issues
+WordPress uses `mysqli` for connecting to the database, but Laravel uses `PDO`. So if you want to use the `DB` facade of Laravel, you have to install the `pdo_mysql` extension for PHP.
+A `mysqli` driver for Laravel is in the works for LaraWelP, but for now, you might get errors in
+some environments where PDO is not available (eg: wp-env).
 
 # Get Started
 
