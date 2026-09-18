@@ -10,7 +10,7 @@ use Illuminate\Foundation\Http\Events\RequestHandled;
 use Illuminate\Pipeline\Pipeline;
 use Illuminate\Support\Facades\Facade;
 use LaraWelP\Foundation\Http\Kernel as HttpKernel;
-use Exception;
+use Throwable;
 
 class Kernel extends HttpKernel
 {
@@ -142,7 +142,7 @@ class Kernel extends HttpKernel
                         ->send($request)
                         ->through($this->app->shouldSkipMiddleware() ? [] : $this->middleware)
                         ->then($this->dispatchToRouter());
-                } catch (Exception $e) {
+                } catch (Throwable $e) {
                     $this->reportException($e);
 
                     $response = $this->renderException($request, $e);
@@ -160,8 +160,11 @@ class Kernel extends HttpKernel
     {
         $originalRouter = $this->router;
         $this->router = $this->app['wpRouter']->getRouter();
-        parent::syncMiddlewareToRouter();
-        $this->router = $originalRouter;
+        try {
+            parent::syncMiddlewareToRouter();
+        } finally {
+            $this->router = $originalRouter;
+        }
     }
 
     protected function renderException($request, \Throwable $e)
